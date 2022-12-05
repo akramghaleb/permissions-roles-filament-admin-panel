@@ -11,27 +11,42 @@ class UserPolicy
 
     public function viewAny(User $user)
     {
-        return $user->hasAnyRole(['super-admin', 'admin', 'moderator' ]);
+        $permission = \Spatie\Permission\Models\Permission::where('name' , 'like', 'read: user')->get()[0]->roles()->get();
+        $permission_list = array();
+        foreach ($permission as $i=>$d){
+            $permission_list[]= $d->name;
+        }
+        return $user->hasAnyRole($permission_list);
     }
 
 
     public function create(User $user)
     {
-        return $user->hasAnyRole(['super-admin', 'admin' ]);
+        $permission = \Spatie\Permission\Models\Permission::where('name' , 'like', 'create: user')->get()[0]->roles()->get();
+        $permission_list = array();
+        foreach ($permission as $i=>$d){
+            $permission_list[]= $d->name;
+        }
+        return $user->hasAnyRole($permission_list);
     }
 
     public function update(User $user, User $model)
     {
-        return $user->hasAnyRole(['super-admin', 'admin' ]);
+        $permission = \Spatie\Permission\Models\Permission::where('name' , 'like', 'update: user')->get()[0]->roles()->get();
+        $permission_list = array();
+        foreach ($permission as $i=>$d){
+            $permission_list[]= $d->name;
+        }
+        return $user->hasAnyRole($permission_list);
     }
 
     public function delete(User $user, User $model)
     {
-        return $user->hasAnyRole(['super-admin', 'admin' ]);
-    }
-
-    public function restore(User $user, User $model)
-    {
-        return $user->hasAnyRole(['super-admin', 'admin' ]);
+        $permission = \Spatie\Permission\Models\Permission::where('name' , 'like', 'delete: user')->get()[0]->roles()->get();
+        $permission_list = array();
+        foreach ($permission as $i=>$d){
+            $permission_list[]= $d->name;
+        }
+        return $user->hasAnyRole($permission_list);
     }
 }

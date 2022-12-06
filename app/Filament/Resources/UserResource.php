@@ -36,9 +36,15 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $navigationGroup = 'Admin Management';
+    protected static ?string $navigationGroup = 'الاعدادات';
 
     //protected static bool $shouldRegisterNavigation = false;
+
+    protected static ?int $navigationSort = 1;
+
+
+    protected static ?string $pluralModelLabel = 'المستخدمين';
+    protected static ?string $modelLabel = 'مستخدم';
 
     public static function form(Form $form): Form
     {
@@ -46,13 +52,13 @@ class UserResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(191),
+                    ->maxLength(191)->label('الاسم'),
                 Forms\Components\Toggle::make('is_admin')
-                    ->required(),
+                    ->required()->label('مستخدم رئيسي'),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
-                    ->maxLength(191),
+                    ->maxLength(191)->label('الايميل'),
                 TextInput::make('password')
                     ->password()
                     ->maxLength(191)
@@ -63,12 +69,12 @@ class UserResource extends Resource
                     )->dehydrated(static fn (null|string $state): bool =>
                     filled($state),
                     )->label(static fn (Page $livewire): string =>
-                    ($livewire instanceof EditUser) ? 'New Password' : 'Password'
-                    ),
+                    ($livewire instanceof EditUser) ? 'كلمة المرور جديدة' : 'كلمة المرور'
+                    )->label('كلمة المرور'),
                 CheckboxList::make('roles')
                     ->relationship('roles','name')
                     ->columns(2)
-                    ->helperText('Only Choose One!')
+                    ->helperText('Only Choose One!')->label('الصلاحية')
                 ->required(),
             ]);
     }
@@ -77,17 +83,17 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')->label('الاسم'),
                 Tables\Columns\IconColumn::make('is_admin')
                     ->sortable()
                     ->searchable()
-                    ->boolean(),
-                TextColumn::make('roles.name')->sortable()->searchable(),
+                    ->boolean()->label('مستخدم رئيسي'),
+                TextColumn::make('roles.name')->sortable()->searchable()->label('الصلاحية'),
                 Tables\Columns\TextColumn::make('email')
                     ->sortable()
-                    ->searchable(),
-                TextColumn::make('deleted_at')->dateTime('d-M-Y')->sortable()->searchable(),
-                TextColumn::make('created_at')->dateTime('d-M-Y')->sortable()->searchable(),
+                    ->searchable()->label('الايميل'),
+                TextColumn::make('deleted_at')->dateTime('d-M-Y')->sortable()->searchable()->label('تاريخ الحذف'),
+                TextColumn::make('created_at')->dateTime('d-M-Y')->sortable()->searchable()->label('تاريخ الانشاء'),
             ])
             ->filters([
                 TrashedFilter::make(),

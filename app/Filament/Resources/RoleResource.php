@@ -24,7 +24,15 @@ class RoleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cog';
 
-    protected static ?string $navigationGroup = 'Admin Management';
+    protected static ?string $navigationGroup = 'الاعدادات';
+
+
+    protected static ?int $navigationSort = 2;
+
+    //protected static ?string $navigationLabel = 'الاذونات';
+
+    protected static ?string $pluralModelLabel = 'الصلاحيات';
+    protected static ?string $modelLabel = 'صلاحية';
 
     public static function form(Form $form): Form
     {
@@ -33,11 +41,11 @@ class RoleResource extends Resource
                 Card::make()->schema([
                     TextInput::make('name')
                     ->unique(ignoreRecord: true)
-                    ->required(),
+                    ->required()->label('الاسم'),
                     MultiSelect::make('permissions')
                     ->relationship('permissions','name')
                     ->preload()
-                    ->required(),
+                    ->required()->label('الاذونات'),
                 ])
             ]);
     }
@@ -46,9 +54,9 @@ class RoleResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')->sortable(),
-                TextColumn::make('name')->sortable()->searchable(),
-                TextColumn::make('created_at')->dateTime('d-M-Y')->sortable()->searchable(),
+                TextColumn::make('id')->sortable()->label('#'),
+                TextColumn::make('name')->sortable()->searchable()->label('الاسم'),
+                TextColumn::make('created_at')->dateTime('d-M-Y')->sortable()->searchable()->label('تاريخ الانشاء'),
             ])
             ->filters([
                 //

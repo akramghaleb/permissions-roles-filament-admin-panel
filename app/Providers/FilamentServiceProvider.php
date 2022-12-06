@@ -29,21 +29,22 @@ class FilamentServiceProvider extends ServiceProvider
     public function boot()
     {
         Filament::serving(function () {
+            Filament::registerViteTheme('resources/css/filament.css');
             if(auth()->user()){
                 if (auth()->user()->is_admin === 1 && auth()->user()->hasAnyRole(['super-admin', 'admin', 'moderator'])) {
                     Filament::registerUserMenuItems([
                         UserMenuItem::make()
-                            ->label('Manage Users')
+                            ->label('المستخدمين')
                             ->url(UserResource::getUrl())
                             ->icon('heroicon-s-users'),
 
                         UserMenuItem::make()
-                            ->label('Manage Roles')
+                            ->label('الصلاحيات')
                             ->url(RoleResource::getUrl())
                             ->icon('heroicon-s-cog'),
 
                         UserMenuItem::make()
-                            ->label('Manage Permission')
+                            ->label('الاذونات')
                             ->url(PermissionResource::getUrl())
                             ->icon('heroicon-s-key'),
                     ]);

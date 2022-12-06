@@ -16,13 +16,16 @@ class PermissionsRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected static ?string $pluralModelLabel = 'الاذونات';
+    protected static ?string $modelLabel = 'اذن';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)->label('الاسم'),
             ]);
     }
 
@@ -30,7 +33,7 @@ class PermissionsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')->label('الاسم'),
             ])
             ->filters([
                 //
@@ -45,5 +48,5 @@ class PermissionsRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }    
+    }
 }

@@ -20,8 +20,16 @@
 
 <br><br>
 
-| Web Screens                                |
-|--------------------------------------------|
+| Web Screens                         |
+|-------------------------------------|
+| ![Project Screenshot 2](scs/9.png)  |
+| ![Project Screenshot 2](scs/10.png) |
+| ![Project Screenshot 2](scs/11.png) |
+| ![Project Screenshot 2](scs/12.png) |
+| ![Project Screenshot 2](scs/13.png) |
+| ![Project Screenshot 2](scs/14.png) |
+| ![Project Screenshot 2](scs/15.png) |
+| ![Project Screenshot 2](scs/16.png) |
 | ![Project Screenshot 2](scs/1.png)  |
 | ![Project Screenshot 2](scs/2.png)  |
 | ![Project Screenshot 2](scs/3.png)  |
@@ -30,11 +38,4 @@
 | ![Project Screenshot 2](scs/6.png)  |
 | ![Project Screenshot 2](scs/7.png)  |
 | ![Project Screenshot 2](scs/8.png)  |
-| ![Project Screenshot 2](scs/9.png)  |
-| ![Project Screenshot 2](scs/10.png) |
-| ![Project Screenshot 2](scs/11.png) |
-| ![Project Screenshot 2](scs/12.png) |
-| ![Project Screenshot 2](scs/13.png) |
-| ![Project Screenshot 2](scs/14.png) |
-| ![Project Screenshot 2](scs/15.png) |
   

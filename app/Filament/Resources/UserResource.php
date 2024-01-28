@@ -7,8 +7,8 @@ use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
 use Filament\Pages\Page;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
 use Illuminate\Support\Facades\Hash;
@@ -29,6 +29,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Resources\UserResource\Pages\ListUsers;
 use App\Filament\Resources\UserResource\Pages\CreateUser;
+use stdClass;
 
 class UserResource extends Resource
 {
@@ -36,29 +37,55 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $navigationGroup = 'الاعدادات';
+    protected static ?int $navigationSort = 61;
 
-    //protected static bool $shouldRegisterNavigation = false;
+    // Main Title
+    // protected static ?string $title = 'About';
+    public static function getPluralModelLabel(): string
+    {
+        return __('User.PluralModelLabel');
+    }
 
-    protected static ?int $navigationSort = 1;
+    public static function getModelLabel(): string
+    {
+        return __('User.ModelLabel');
+    }
 
+    // Group Name
+    // protected static ?string $navigationGroup = 'General Settings';
+    public static function getNavigationGroup(): string
+    {
+        return __('User.group');
+    }
 
-    protected static ?string $pluralModelLabel = 'المستخدمين';
-    protected static ?string $modelLabel = 'مستخدم';
+    // global search function
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'email'];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Card::make()->columns(2)->schema([
+                    Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(191)->label('الاسم'),
+                    ->maxLength(191)
+                    ->label(__('User.name')),
                 Forms\Components\Toggle::make('is_admin')
-                    ->required()->label('مستخدم رئيسي'),
+                    ->required()
+                    ->label(__('User.is_admin')),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
-                    ->maxLength(191)->label('الايميل'),
+                    ->maxLength(191)
+                    ->label(__('User.email')),
                 TextInput::make('password')
                     ->password()
                     ->maxLength(191)
@@ -70,12 +97,14 @@ class UserResource extends Resource
                     filled($state),
                     )->label(static fn (Page $livewire): string =>
                     ($livewire instanceof EditUser) ? 'كلمة المرور جديدة' : 'كلمة المرور'
-                    )->label('كلمة المرور'),
+                    )->label(__('User.password')),
                 CheckboxList::make('roles')
                     ->relationship('roles','name')
                     ->columns(2)
-                    ->helperText('Only Choose One!')->label('الصلاحية')
+                    ->helperText('Only Choose One!')
+                    ->label(__('User.roles'))
                 ->required(),
+                ]),
             ]);
     }
 
@@ -83,20 +112,27 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->label('الاسم'),
+                TextColumn::make('index')->getStateUsing(static
+                function (stdClass $rowLoop): string {
+                    return (string) $rowLoop->iteration;
+                })->label('#'),
+                Tables\Columns\TextColumn::make('name')
+                ->label(__('User.name')),
                 Tables\Columns\IconColumn::make('is_admin')
                     ->sortable()
-                    ->searchable()
-                    ->boolean()->label('مستخدم رئيسي'),
-                TextColumn::make('roles.name')->sortable()->searchable()->label('الصلاحية'),
+                    ->boolean()
+                    ->label(__('User.is_admin')),
+                TextColumn::make('roles.name')->sortable()->searchable()->label(__('User.roles')),
                 Tables\Columns\TextColumn::make('email')
                     ->sortable()
-                    ->searchable()->label('الايميل'),
-                TextColumn::make('deleted_at')->dateTime('d-M-Y')->sortable()->searchable()->label('تاريخ الحذف'),
-                TextColumn::make('created_at')->dateTime('d-M-Y')->sortable()->searchable()->label('تاريخ الانشاء'),
+                    ->searchable()
+                    ->label(__('User.email')),
+                TextColumn::make('created_at')->dateTime('d-M-Y')->sortable()->searchable()
+                    ->label(__('User.created_at')),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
-                TrashedFilter::make(),
+                //TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

@@ -7,14 +7,15 @@ use App\Filament\Resources\PermissionResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\TextInput;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Spatie\Permission\Models\Permission;
+use stdClass;
 
 class PermissionResource extends Resource
 {
@@ -22,14 +23,26 @@ class PermissionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-key';
 
-    protected static ?string $navigationGroup = 'الاعدادات';
+    protected static ?int $navigationSort = 63;
 
-    protected static ?int $navigationSort = 3;
+    // Main Title
+    // protected static ?string $title = 'About';
+    public static function getPluralModelLabel(): string
+    {
+        return __('Permission.PluralModelLabel');
+    }
 
-    //protected static ?string $navigationLabel = 'الاذونات';
+    public static function getModelLabel(): string
+    {
+        return __('Permission.ModelLabel');
+    }
 
-    protected static ?string $pluralModelLabel = 'الاذونات';
-    protected static ?string $modelLabel = 'اذن';
+    // Group Name
+    // protected static ?string $navigationGroup = 'General Settings';
+    public static function getNavigationGroup(): string
+    {
+        return __('Permission.group');
+    }
 
 
 
@@ -43,7 +56,7 @@ class PermissionResource extends Resource
                     TextInput::make('name')
                         ->unique()
                         ->required()
-                        ->label('الاسم'),
+                        ->label(__('Permission.name')),
                 ])
             ]);
     }
@@ -52,10 +65,19 @@ class PermissionResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')->sortable()->label('#'),
-                TextColumn::make('name')->sortable()->searchable()->label('الاسم'),
-                TextColumn::make('created_at')->dateTime('d-M-Y')->sortable()->searchable()->label('تاريخ الانشاء'),
+                TextColumn::make('index')->getStateUsing(static
+                function (stdClass $rowLoop): string {
+                    return (string) $rowLoop->iteration;
+                })->label('#'),
+                //TextColumn::make('id')->sortable()->label('#'),
+                TextColumn::make('name')->sortable()->searchable()
+                    ->label(__('Permission.name')),
+                TextColumn::make('created_at')
+                    ->dateTime('d-M-Y')
+                    ->sortable()
+                    ->label(__('Permission.created_at')),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

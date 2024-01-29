@@ -13,23 +13,14 @@
 - Support permission and roles for users
 - Support Arabic & English language 
 - Changing filament theme
+- Support SPA (Single Page Application)
 - If you like this work you can <a href="https://github.com/akramghaleb">see more here</a>
 
 <br><br>
 
 | Web Screens                         |
 |-------------------------------------|
-| ![Project Screenshot 2](scs/1.png)  |
-| ![Project Screenshot 2](scs/2.png)  |
 | ![Project Screenshot 2](scs/3.png)  |
-| ![Project Screenshot 2](scs/4.png)  |
-| ![Project Screenshot 2](scs/5.png)  |
-| ![Project Screenshot 2](scs/6.png)  |
-| ![Project Screenshot 2](scs/7.png)  |
-| ![Project Screenshot 2](scs/8.png)  |
-| ![Project Screenshot 2](scs/9.png)  |
-| ![Project Screenshot 2](scs/10.png) |
-| ![Project Screenshot 2](scs/11.png) |
 | ![Project Screenshot 2](scs/12.png) |
 | ![Project Screenshot 2](scs/13.png) |
 | ![Project Screenshot 2](scs/14.png) |
@@ -37,6 +28,7 @@
 | ![Project Screenshot 2](scs/16.png) |
 | ![Project Screenshot 2](scs/17.png) |
 | ![Project Screenshot 2](scs/18.png) |
+| ![Project Screenshot 2](scs/1.png)  |
 | ![Project Screenshot 2](scs/19.png) |
 | ![Project Screenshot 2](scs/20.png) |
 | ![Project Screenshot 2](scs/21.png) |
@@ -45,6 +37,15 @@
 | ![Project Screenshot 2](scs/24.png) |
 | ![Project Screenshot 2](scs/25.png) |
 | ![Project Screenshot 2](scs/26.png) |
+| ![Project Screenshot 2](scs/4.png)  |
+| ![Project Screenshot 2](scs/5.png)  |
+| ![Project Screenshot 2](scs/6.png)  |
+| ![Project Screenshot 2](scs/7.png)  |
+| ![Project Screenshot 2](scs/8.png)  |
+| ![Project Screenshot 2](scs/9.png)  |
+| ![Project Screenshot 2](scs/10.png) |
+| ![Project Screenshot 2](scs/11.png) |
+| ![Project Screenshot 2](scs/2.png)  |
 | ![Project Screenshot 2](scs/27.png) |
 | ![Project Screenshot 2](scs/28.png) |
 | ![Project Screenshot 2](scs/29.png) |
@@ -52,5 +53,4 @@
 | ![Project Screenshot 2](scs/31.png) |
 | ![Project Screenshot 2](scs/32.png) |
 | ![Project Screenshot 2](scs/33.png) |
-
   

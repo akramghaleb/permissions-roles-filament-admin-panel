@@ -13,6 +13,7 @@
 - Support permission and roles for users
 - Support Arabic & English language 
 - Changing filament theme
+- Support SPA (Single Page Application)
 - If you like this work you can <a href="https://github.com/akramghaleb">see more here</a>
 
 <br><br>
